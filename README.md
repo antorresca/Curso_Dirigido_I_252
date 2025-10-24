@@ -28,6 +28,12 @@
 
 ## 🚗 Conociendo al SDV
 
+En el proceso de migración del SDVUN1 a ROS2 es necesario conocer de primera mano el funcionamiento y operación de los componentes del robot. Lo primero por descubrir es el rol de la Tiva en el proceso de comunicación entre los drivers de los motores y la NUC.
+Primero iniciamos con las conexiones fisicas entre los motores y los encoders a los drivers, a continuación se presenta el esquema de conexiones descritas.
+
+
+La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado en el laboratorio y se encarga de enviar los parámetros de velocidad a los drivers de los motores.
+
 ## 🔢 Procedimiento
 
 ### 🏗️ Arquitectura en ROS Noetic
