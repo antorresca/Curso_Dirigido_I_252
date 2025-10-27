@@ -39,7 +39,10 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 
 Caracterización de los motores
 Para este proceso se enviaron valores de PWM a la tiva iniciando en 20 y en paso de 10 hasta 60 y se contó el número de revoluciones para mismos periodos de tiempo en cada prueba como se muestra en el siguiente video:
-https://github.com/user-attachments/assets/3671fbed-32fd-4de0-80da-c60e88005442
+
+<div align ='center'>
+   <video src='https://github.com/user-attachments/assets/3671fbed-32fd-4de0-80da-c60e88005442'>
+</div>
 
 A partir de la información obtenida se elaboró la siguiente tabla que muestra los valores obtenidos:
 
