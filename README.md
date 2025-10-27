@@ -32,7 +32,25 @@ En el proceso de migración del SDVUN1 a ROS2 es necesario conocer de primera ma
 Primero iniciamos con las conexiones fisicas entre los motores y los encoders a los drivers, a continuación se presenta el esquema de conexiones descritas.
 
 
+
+
+
 La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado en el laboratorio y se encarga de enviar los parámetros de velocidad a los drivers de los motores.
+
+Caracterización de los motores
+Para este proceso se enviaron valores de PWM a la tiva iniciando en 20 y en paso de 10 hasta 60 y se contó el número de revoluciones para mismos periodos de tiempo en cada prueba como se muestra en el siguiente video:
+https://github.com/user-attachments/assets/3671fbed-32fd-4de0-80da-c60e88005442
+
+A partir de la información obtenida se elaboró la siguiente tabla que muestra los valores obtenidos:
+
+| % PWM | RPM RUEDAS | 
+|    :---:     |     :---:     |  
+| 20   | 2    | 
+| 30   | 4    | 
+| 40   | 6    |
+| 50   | 8    |
+| 60   | 10   |
+
 
 ## 🔢 Procedimiento
 
