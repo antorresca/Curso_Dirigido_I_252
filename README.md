@@ -45,7 +45,8 @@ Para este proceso se enviaron valores de PWM a la tiva iniciando en 20 y en paso
 </div>
 
 A partir de la información obtenida se elaboró la siguiente tabla que muestra los valores obtenidos:
-
+<div align ='center'>
+   
 | % PWM | RPM RUEDAS | 
 |    :---:     |     :---:     |  
 | 20   | 2    | 
@@ -54,6 +55,7 @@ A partir de la información obtenida se elaboró la siguiente tabla que muestra 
 | 50   | 8    |
 | 60   | 10   |
 
+</div>
 
 ## 🔢 Procedimiento
 
