@@ -12,7 +12,7 @@
 
 - [📡 Algoritmos de Navegación y Localización - 2025-2](#-algoritmos-de-navegación-y-localización---2025-2)
   - [🪶 Estudiantes:](#-estudiantes)
-  - [👨‍🏫 Profesores:](#-profesores)
+  - [👨‍🏫 Profesores:](#%E2%80%8D-profesores)
   - [📚 Indice](#-indice)
   - [🎯 Objetivos](#-objetivos)
   - [🚗 Conociendo al SDV](#-conociendo-al-sdv)
@@ -78,16 +78,20 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 
 ### 🤖 Arquitectura en ROS2 Humble
 
-Una vez se comprendió la comunicación entre la NUC y la tiva para el envio de comandos al driver de los motores se procedió con la actualización de los nodos descritros en [Arquitectura en ROS Noetic](#arquitectura-en-ros-noetic). Acontinuación se describen los nodos actualizados
+Una vez se comprendió la comunicación entre la NUC y la tiva para el envio de comandos al driver de los motores se procedió con la actualización de los nodos descritros en [Arquitectura en ROS Noetic](#️-arquitectura-en-ros-noetic). Acontinuación se describen los nodos actualizados
 
-* **_SDV_Serial:_**  Permite la comunicación con la Tiva por medio del puerto serial. Los comandos enviados siguen la tabla descrita en la sección [Firmware de Tiva](#firmware-de-tiva)
-* **_SDV_Control:_**  Realiza la cinematica inversa del robot, por medio de la transformación de las velocidades lineales y angulares a valores PWM para cada rueda. Para mayor información ir a [Cinemática del SDV](#Cinematica-SDV)
+* **_SDV_Serial:_**  Permite la comunicación con la Tiva por medio del puerto serial. Los comandos enviados siguen la tabla descrita en la sección [Firmware de Tiva](#-firmware-de-tiva).
+* **_SDV_Control:_**  Realiza la cinematica inversa del robot, por medio de la transformación de las velocidades lineales y angulares a valores PWM para cada rueda. Para mayor información ir a [Cinemática del SDV](#️-cinemática-del-sdv)
 
 ### ⚙️ Cinemática del SDV
 
 #### 🧾 Pruebas iniciales
 
 Para comprobar el correcto funcionamiento del robot, se verificó la cinematica implementada en la version inicial (Con ROS noetic) para ello se tomó un video enviadole una velocidad lineal de $0.1\tfrac{m}{s}$ y se procesó con Tracker
+
+<div align="center">
+<img width="700"  alt="Lineal_previo_Tracker" src="https://github.com/user-attachments/assets/fc5f697a-1fa2-445c-abf7-4f3b6a6b87b4" />
+</div>
 
 Al realizar el analisis con los datos recolectados con el programa dio un promedio de $0.06\tfrac{m}{s}$ dando un error absoluto en la velocidad lineal de aproximadamente 40%. Teniendo en cuenta esto, no se realizó la prueba angular y se siguió con la caracterización de los motores y la implementación de una nueva cinemática.
 
@@ -128,11 +132,11 @@ Con la regresion lineal hallada en la [Caracterización de motores](#-caracteriz
 - La conversion debe ser a PWM y se debe tener en cuenta que la regresion es PWM $vs$ RPM
 - Al considerarse igualdad en la ganancia en ambos sentidos de giro se debe tomar el valor absoluto de la velocidad y solo cambia el signo para aplicar el cambio de giro
 
-Por lo cual la ecuacion cambia a
+Por lo cual la ecuación cambia a
 
-$$\text{PWM} = 0.8333(\tfrac{30}{\pi})v_{\text{rueda}} + 10$$
+$$\text{PWM} = 0.8333(\tfrac{30}{\pi})|v_{\text{rueda}}| + 10$$
 
-Dicha ecuacion se implementó en el código como se observa acontinuación:
+Dicha ecuación se implementó en el código como se observa acontinuación:
 
 ```cpp
 int getPWM(double V, double W,bool Side){
@@ -167,6 +171,13 @@ int getPWM(double V, double W,bool Side){
 #### ✅ Validación de cinemática
 
 Una vez cambiada la cinematica implementada, se verificó la velocidad lineal y angular, para ello se tomaron videos y se procesaron con el sofware Tracker
+
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/30ef1ca8-a4df-4e1f-a082-2f067486d7b9" 
+       alt="Lineal_Tracker" width="45%" style="display: inline-block; margin-right: 10px;" />
+  <img src="https://github.com/user-attachments/assets/1cafe035-001f-4ff1-9eef-9d4a9bfb6a33" 
+       alt="Angular_Tracker" width="45%" style="display: inline-block;" />
+</div>
 
 Dando como resultado:
 
