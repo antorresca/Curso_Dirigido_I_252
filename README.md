@@ -198,8 +198,8 @@ Dando como resultado:
 
 |Velocidad|Enviada|Medida|Error|
 |---|----|---|---|
-|Lineal ($v$)|$0.1\tfrac{m}{s}$|$0.09\tfrac{m}{s}$|$7\%$|
-|Angular ($\omega$)|$0.5\tfrac{rad}{s}$|$0.43\tfrac{rad}{s}$|$13\%$|
+|Lineal ($v$)|$0.1\tfrac{m}{s}$|$0.09\tfrac{m}{s}$|$7$%|
+|Angular ($\omega$)|$0.5\tfrac{rad}{s}$|$0.43\tfrac{rad}{s}$|$13$%|
 
 </div>
 
@@ -230,7 +230,9 @@ ros2 launch sick_scan_xd sick_nav_350.launch.py
 
 dichos nodos permiten la comunicación con el Lidar y la habilitación del topico "_/scan_" el cual manda mensajes de tipo "_sensor_msgs/msg/LaserScan_"  para visualizar el funcionamiento del Lidar una vez esté conectado a ROS2, se puede ejecutar RViz2 como se ve acontinuación:
 
-
+<div align="center">
+<img width="1919" height="1076" alt="Screenshot from 2025-10-30 10-21-09" src="https://github.com/user-attachments/assets/f12cae8f-1e4e-4693-9c63-7cb3fb104eda" />
+</div>
 
 Aca se puede ver el entorno que el lidar puede percibir
 
