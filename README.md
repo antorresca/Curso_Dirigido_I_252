@@ -82,6 +82,14 @@ Esta arquitectura se encuentra bajos derechos de autor por lo cual no puede se c
 
 ### 💻 Firmware de Tiva
 
+para acceder al firmware de la tiva se ejecuta el siguiente comando
+
+```bash
+screen /dev/ttyACM0 921600
+```
+
+dentro de screen se envia el comando "h" para poder revisar la información de los comandos disponibles para usarlo
+
 <div align="center">
 
 <img width="591" height="547" alt="Screenshot_2025-10-30_09-59-37" src="https://github.com/user-attachments/assets/237ad5b4-42c9-4e8d-95d9-b5fc4b87f575" />
@@ -207,7 +215,10 @@ Dando como resultado:
 
 Para conectar el lidar, en un principio se empleó _SOPAS ET_ para poder verificacar el modo en el que se encuentra el LIDAR, con la finalidad de evitar posibles fallos en la conexión
 
-
+<div align="center">
+<img width="402" height="586" alt="SOPAS_IP" src="https://github.com/user-attachments/assets/1bb77ef5-e4bc-4f0c-9c7d-7a5f5b60fa0c" />
+<img width="1366" height="730" alt="SOPAS_Nav" src="https://github.com/user-attachments/assets/bf68d156-fd40-4b27-8c28-6c06eb0a972a" />
+</div>
 
 una vez verificado se siguió el procedimiento del paquete oficial para ROS2 creado por el fabricante ([sick_scan_xd](https://docs.ros.org/en/iron/p/sick_scan_xd/)), dicho paquete fue incluido en el _workspace_ y se eliminaron los archivos no necesarios. Una vez con este paquete fue necesario realizar cambios en el archivo "_sick_nav_350.launch_" puesto que la IP que trae por defecto el Lidar fue modificada para evitar que se pueda acceder directamente desde WiFi
 
