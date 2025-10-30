@@ -103,14 +103,21 @@ para acceder al firmware de la tiva se ejecuta el siguiente comando
 screen /dev/ttyACM0 921600
 ```
 
-dentro de screen se envia el comando "h" para poder revisar la información de los comandos disponibles para usarlo
+**Nota:** Se debe tener instalado "screen" (ejecutar ```sudo apt install screen```)
+
+dentro de screen se envia el comando ```h``` para poder revisar la información de los comandos disponibles para usarlo
 
 <div align="center">
 
 <img width="591" height="547" alt="Screenshot_2025-10-30_09-59-37" src="https://github.com/user-attachments/assets/237ad5b4-42c9-4e8d-95d9-b5fc4b87f575" />
 
 </div>
-<!--Informacion general del firmware-->
+
+Aca se puede observar los deversos comandos que se pueden enviar a la tiva, el necesario para el uso de los motores es ```m``` con los argumentos de habilitación y velocidades con signo de cada motor. Con ello se concluye que:
+
+* al enviar ```m 1 +V1 +V2``` los motores se habilitan y giran en sentido que avance el robot
+* al enviar ```m 0 +/-V1 +/-V2``` los motores se deshabilitan y el robot se detiene
+* Las velocidades que se envian tiene en cuenta el marco de referencia del robot ($+x$ en sentido de avance) mas no el marco de referencia de cada rueda ($+z$ saliendo de la rueda, provocando que la rueda derecha deba girar en sentido negativo a este marco para lograr avance lineal)
 
 ### 🤖 Arquitectura en ROS2 Humble
 
