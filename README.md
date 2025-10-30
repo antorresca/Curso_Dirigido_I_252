@@ -68,12 +68,25 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 
 ## 🔢 Procedimiento
 
-### 🏗️ Arquitectura en ROS Noetic
+### 🏗️ Arquitectura en ROS Melodic
 
 <!---Mostrar RQT de ROS1--->
 
+La arquitectura inicial desarollada por el grupo DIMA fue hecha en ROS Melodic 1.14.12 y los nodos y topicos se muestran acontinuación en el RQT de funcionamiento.
+
+<div align="center">
+<img width="2960" height="1224" alt="Group" src="https://github.com/user-attachments/assets/19fe4194-843f-41f9-9f89-4250225912e9" />
+</div>
+
+Esta arquitectura se encuentra bajos derechos de autor por lo cual no puede se compartida en su totalidad.
+
 ### 💻 Firmware de Tiva
 
+<div align="center">
+
+<img width="591" height="547" alt="Screenshot_2025-10-30_09-59-37" src="https://github.com/user-attachments/assets/237ad5b4-42c9-4e8d-95d9-b5fc4b87f575" />
+
+</div>
 <!--Informacion general del firmware-->
 
 ### 🤖 Arquitectura en ROS2 Humble
