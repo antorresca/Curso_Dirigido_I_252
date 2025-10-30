@@ -31,6 +31,7 @@
       - [📝 Caracterización de motores](#-caracterización-de-motores)
       - [🔧Cambio en cinemática](#cambio-en-cinemática)
       - [✅ Validación de cinemática](#-validación-de-cinemática)
+    - [🖥️ Simulación](#️-simulación)
     - [📡 Lidar](#-lidar-1)
   - [📖 Bibliografia](#-bibliografia)
 
@@ -70,15 +71,29 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 
 ### 🏗️ Arquitectura en ROS Melodic
 
-<!---Mostrar RQT de ROS1--->
-
-La arquitectura inicial desarollada por el grupo DIMA fue hecha en ROS Melodic 1.14.12 y los nodos y topicos se muestran acontinuación en el RQT de funcionamiento.
+La arquitectura inicial desarrollada por el grupo DIMA fue implementada en ROS Melodic 1.14.12 y los nodos y tópicos implementados se muestran a continuación en el RQT de funcionamiento.
 
 <div align="center">
 <img width="2960" height="1224" alt="Group" src="https://github.com/user-attachments/assets/19fe4194-843f-41f9-9f89-4250225912e9" />
 </div>
 
-Esta arquitectura se encuentra bajos derechos de autor por lo cual no puede se compartida en su totalidad.
+**Nota:** Esta arquitectura se encuentra bajo derechos de autor por lo cual no puede ser compartida en su totalidad.
+
+A partir de este RQT se puede observar lo siguiente:
+
+* Existe un nodo dedicado a la comunicación con la Tiva.
+* Se emplea el paquete oficial de ROS "*move_base*" para la navegación.
+* Se utiliza Hector Mapping para el SLAM.
+* Hay nodos dedicados a la comunicación en red y con Firebase.
+* Existen nodos exclusivos para el uso del Lidar.
+  
+Teniendo en cuenta lo anterior se decidió empezar con la actualización a ROS2 de las siguientes características:
+
+* Comunicación serial a la Tiva
+* Navegación con "*Nav2*" de ROS2 ("*Move Base*" no existe para ROS2)
+* Uso de Lidar con paquetes oficiales de SICK
+
+Cabe aclarar que se tiene acceso a los archivos originales de los SDV por lo cual se puede reutilizar archivos de declaraciones (en C++) y simulaciones (con archivos DAE).
 
 ### 💻 Firmware de Tiva
 
@@ -211,12 +226,26 @@ Dando como resultado:
 
 </div>
 
+### 🖥️ Simulación
+
+Para la simulación se emplearon los archivos base de gazebo desarrollados previamente acotandolos especificamente para el SDV 1 (puesto que para cada SDV cambian ciertas caracteristicas técnicas y físicas) estos archivos de lanzamiento fueron actualizados para ROS2, debido a que ya no se emplean archivos de tipo YML sino que los parametros deben ser declarados dentro de los propios archivos de lanzamiento, por otro lado, en el desarrollo original se tenian diversos parametros para cada SDV tanto generales como especificos por lo cual fue necesario comprender los archivos URDF para el correcto ensamble en Gazebo del robot. A continuación se puede observar el modelo CAD del robot en Gazebo:
+
+
+
+Tambien se planteó el uso del software *NVIDIA - Issac Sim* para la simulación robotica, sin embargo, este producto requiere amplias capacidades de computo por lo cual no ha sido posible su uso.
+
 ### 📡 Lidar
 
-Para conectar el lidar, en un principio se empleó _SOPAS ET_ para poder verificacar el modo en el que se encuentra el LIDAR, con la finalidad de evitar posibles fallos en la conexión
+Para conectar el lidar, se emplea el software oficial *SOPAS_ET*. En primer lugar se verifica la IP asignada al Lidar para su conexión, como se puede ver acontinuación:
 
 <div align="center">
 <img width="402" height="586" alt="SOPAS_IP" src="https://github.com/user-attachments/assets/1bb77ef5-e4bc-4f0c-9c7d-7a5f5b60fa0c" />
+
+</div>
+
+Quedando asignada la IP "169.254.7.16". Ya con esto se verifica el modo de operación del Lidar que debe ser Navegación para poder emplear su capacidad de mapeo y de odometria, en la siguiente imagen se puede observar el mapeo con el programa
+
+<div align="center">
 <img width="1366" height="730" alt="SOPAS_Nav" src="https://github.com/user-attachments/assets/bf68d156-fd40-4b27-8c28-6c06eb0a972a" />
 </div>
 
