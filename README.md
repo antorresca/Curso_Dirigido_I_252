@@ -12,7 +12,7 @@
 
 - [📡 Algoritmos de Navegación y Localización - 2025-2](#-algoritmos-de-navegación-y-localización---2025-2)
   - [🪶 Estudiantes:](#-estudiantes)
-  - [👨‍🏫 Profesores:](#%E2%80%8D-profesores)
+  - [👨‍🏫 Profesores:](#-profesores)
   - [📚 Indice](#-indice)
   - [🎯 Objetivos](#-objetivos)
   - [🚗 Conociendo al SDV](#-conociendo-al-sdv)
@@ -23,7 +23,7 @@
       - [🧠 NUC](#-nuc)
       - [📶 Lidar](#-lidar)
   - [🔢 Procedimiento](#-procedimiento)
-    - [🏗️ Arquitectura en ROS Noetic](#️-arquitectura-en-ros-noetic)
+    - [🏗️ Arquitectura en ROS Melodic](#️-arquitectura-en-ros-melodic)
     - [💻 Firmware de Tiva](#-firmware-de-tiva)
     - [🤖 Arquitectura en ROS2 Humble](#-arquitectura-en-ros2-humble)
     - [⚙️ Cinemática del SDV](#️-cinemática-del-sdv)
@@ -228,7 +228,9 @@ Esto con el fin de que se instalen las dependencias necesarias para su correcto 
 ros2 launch sick_scan_xd sick_nav_350.launch.py
 ```
 
-dichos nodos permiten la comunicación con el Lidar y la habilitación del topico "_/scan_" el cual manda mensajes de tipo "_sensor_msgs/LaserSensor_" <!--verificar--> para visualizar el funcionamiento del Lidar una vez esté conectado a ROS2, se puede ejecutar RViz2 como se ve acontinuación:
+dichos nodos permiten la comunicación con el Lidar y la habilitación del topico "_/scan_" el cual manda mensajes de tipo "_sensor_msgs/msg/LaserScan_"  para visualizar el funcionamiento del Lidar una vez esté conectado a ROS2, se puede ejecutar RViz2 como se ve acontinuación:
+
+
 
 Aca se puede ver el entorno que el lidar puede percibir
 
