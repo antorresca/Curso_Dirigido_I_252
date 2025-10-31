@@ -48,11 +48,11 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 ### 🧱 Componentes implementados 
 
 #### 🎛️ Tiva
-
+El SDV utiliza una placa de desarrollo launchpad TIVA de National Instruments, la cual se encarga de configurar la comunicación entre la NUC y los motores del vehículo para la ejecución de un movimiento controlado, a continuación se presenta la imagen de la tiva que además está montada sobre una PCB desarrollada para la hacer la conexión por puerto SATA con los drivers de los respectivos motores:
 <div align="center">
 <img width="400"  alt="Conexión" src="https://github.com/user-attachments/assets/9c5efe28-f632-4d6a-85b1-192cad82ea40" />
 </div>
-
+Además, se desarrolló esta PCB que se encarga del mapeo de las conexiones en el bus SATA como se muestra a continuación:
 <div align="center">
 <img width="300"  alt="PCBEscon" src="https://github.com/user-attachments/assets/aaf3ffca-48dc-428a-867f-3db05c0106f4" />
 </div>
@@ -86,11 +86,11 @@ Los motores tambien son de la marca Maxon Motors, son motores DC con un sistema 
 <!---Poner informacion de los motores--->
 
 #### 🧠 NUC
-
+El procesamiento en general corre sobre una Intel NUC que posee un procesador Core I7 con 8 Núcleos, 8 GB de memoria Ram y un SSD SATA de 240 GB, se conecta a la red local a través de la red WIFI de laboratorio.
 <!---Poner informacion de la NUC y sus caracteristicas de hardware--->
 
 #### 📶 Lidar
-
+El lidar implementado es un Sick Nav 350 el cual tiene una capacidad de detección de 360° se alimenta con 2 Baterías LiPo de 4 celdas cada una y se conecta a la NUC a traves del puerto Ethernet, es necesario mencionar que la IP del adaptador de Red debe estár en el mismo rango de IP que el LiDar ya que una mala configuración no permite que se inicie la comunicación entre el LiDar y la NUC
 <!--Informacion general del lidar-->
 
 ## 🔢 Procedimiento
