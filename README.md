@@ -48,14 +48,24 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 ### 🧱 Componentes implementados 
 
 #### 🎛️ Tiva
+![PCBEscon](https://github.com/user-attachments/assets/aaf3ffca-48dc-428a-867f-3db05c0106f4)
+![Launchpad](https://github.com/user-attachments/assets/9c5efe28-f632-4d6a-85b1-192cad82ea40)
+
 
 <!---Poner informacion del LaunchPad--->
 
 #### 🚏 Driver y Encoder
 
+![Driver](https://github.com/user-attachments/assets/2f4db783-a3cc-49e8-94cb-3a7ce5edbcd4)
+![ConexionPCB](https://github.com/user-attachments/assets/c97b2dc5-3c7d-4005-9fc5-ffeb69124703)
+
+![Encoder](https://github.com/user-attachments/assets/2074c60a-afdb-44dd-bc8b-95d6504c9bb3)
+
 <!---Poner informacion del driver--->
 
 #### 🚘 Motores
+
+![MotorDC](https://github.com/user-attachments/assets/9ff65ddc-7f57-4008-aff4-1093654eaa7f)
 
 <!---Poner informacion de los motores--->
 
