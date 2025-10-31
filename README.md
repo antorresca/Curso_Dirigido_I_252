@@ -49,10 +49,10 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 
 #### 🎛️ Tiva
 <div align="center">
-<img width="700"  alt="PCBEscon" src="https://github.com/user-attachments/assets/aaf3ffca-48dc-428a-867f-3db05c0106f4" />
+<img width="300"  alt="PCBEscon" src="https://github.com/user-attachments/assets/aaf3ffca-48dc-428a-867f-3db05c0106f4" />
 </div>
 <div align="center">
-<img width="700"  alt="PCBEscon" src="https://github.com/user-attachments/assets/9c5efe28-f632-4d6a-85b1-192cad82ea40" />
+<img width="400"  alt="PCBEscon" src="https://github.com/user-attachments/assets/9c5efe28-f632-4d6a-85b1-192cad82ea40" />
 </div>
 
 
@@ -61,10 +61,16 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 
 #### 🚏 Driver y Encoder
 
-![Driver](https://github.com/user-attachments/assets/2f4db783-a3cc-49e8-94cb-3a7ce5edbcd4)
-![ConexionPCB](https://github.com/user-attachments/assets/c97b2dc5-3c7d-4005-9fc5-ffeb69124703)
+<div align="center">
+<img width="400"  alt="PCBEscon" src="https://github.com/user-attachments/assets/2f4db783-a3cc-49e8-94cb-3a7ce5edbcd4" />
+</div>
+<div align="center">
+<img width="400"  alt="PCBEscon" src="https://github.com/user-attachments/assets/c97b2dc5-3c7d-4005-9fc5-ffeb69124703" />
+</div>
+<div align="center">
+<img width="400"  alt="PCBEscon" src="https://github.com/user-attachments/assets/2074c60a-afdb-44dd-bc8b-95d6504c9bb3" />
+</div>
 
-![Encoder](https://github.com/user-attachments/assets/2074c60a-afdb-44dd-bc8b-95d6504c9bb3)
 
 <!---Poner informacion del driver--->
 
