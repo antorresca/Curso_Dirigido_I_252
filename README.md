@@ -48,25 +48,27 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 ### 🧱 Componentes implementados 
 
 #### 🎛️ Tiva
-<div align="center">
-<img width="300"  alt="PCBEscon" src="https://github.com/user-attachments/assets/aaf3ffca-48dc-428a-867f-3db05c0106f4" />
-</div>
+
 <div align="center">
 <img width="400"  alt="Conexión" src="https://github.com/user-attachments/assets/9c5efe28-f632-4d6a-85b1-192cad82ea40" />
 </div>
 
+<div align="center">
+<img width="300"  alt="PCBEscon" src="https://github.com/user-attachments/assets/aaf3ffca-48dc-428a-867f-3db05c0106f4" />
+</div>
 
 
 <!---Poner informacion del LaunchPad--->
 
 #### 🚏 Driver y Encoder
+El driver utilizado es un driver de EsconMotor referencia 50/5 el cual se comunica por puerto serial con la tiva, que le envía los valores de PWM para el motor que controla y se realimenta con el encoder, esta realimentación la usa para realizar el control de velocidad en el motor correspondiente. Tiene diferentes entradas y salidas, entre ellas una entrada para las señales digitales del encoder y un puerto de comunicación con la tiva a traves de un cable SATA. 
 
-<div align="center">
-<img width="400"  alt="Driver Escon" src="https://github.com/user-attachments/assets/2f4db783-a3cc-49e8-94cb-3a7ce5edbcd4" />
-</div>
 <div align="center">
 <img width="400"  alt="Conexion PCBEscon" src="https://github.com/user-attachments/assets/c97b2dc5-3c7d-4005-9fc5-ffeb69124703" />
 </div>
+
+El encoder utilizado tiene una resolucón de 1200 PPR, lo cual brinda una resolución más que suficiente para el control del motor
+
 <div align="center">
 <img width="400"  alt="Encoder" src="https://github.com/user-attachments/assets/2074c60a-afdb-44dd-bc8b-95d6504c9bb3" />
 </div>
@@ -75,8 +77,11 @@ La Tiva se conecta a los drivers por puerto SATA a traves de un shield diseñado
 <!---Poner informacion del driver--->
 
 #### 🚘 Motores
+Los motores tambien son de la marca Maxon Motors, son motores DC con un sistema de engranajes que generan una reducción de 57/1 y elevan el torque del motor. 
+<div align="center">
+<img width="400"  alt="Motor" src="https://github.com/user-attachments/assets/9ff65ddc-7f57-4008-aff4-1093654eaa7f" />
+</div>
 
-![MotorDC](https://github.com/user-attachments/assets/9ff65ddc-7f57-4008-aff4-1093654eaa7f)
 
 <!---Poner informacion de los motores--->
 
