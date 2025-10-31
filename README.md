@@ -89,12 +89,18 @@ Los motores tambien son de la marca Maxon Motors, son motores DC con un sistema 
 
 #### 🧠 NUC
 El procesamiento en general corre sobre una Intel NUC que posee un procesador Core I7 con 8 Núcleos, 8 GB de memoria Ram y un SSD SATA de 240 GB, se conecta a la red local a través de la red WIFI de laboratorio.
+<div align= "center">
+<img width="400"  alt="NUC" src="https://github.com/user-attachments/assets/814236b2-b625-4bf7-a34b-7d7d41c1503f") />
+</div>
+
 <!---Poner informacion de la NUC y sus caracteristicas de hardware--->
 
 #### 📶 Lidar
-El lidar implementado es un Sick Nav 350 el cual tiene una capacidad de detección de 360° se alimenta con 2 Baterías LiPo de 4 celdas cada una y se conecta a la NUC a traves del puerto Ethernet, es necesario mencionar que la IP del adaptador de Red debe estár en el mismo rango de IP que el LiDar ya que una mala configuración no permite que se inicie la comunicación entre el LiDar y la NUC
+El lidar implementado es un Sick Nav 350-3232 el cual tiene una capacidad de detección de 360° se alimenta con 2 Baterías LiPo de 4 celdas cada una y se conecta a la NUC a traves del puerto Ethernet, es necesario mencionar que la IP del adaptador de Red debe estár en el mismo rango de IP que el LiDar ya que una mala configuración no permite que se inicie la comunicación entre el LiDar y la NUC
 <!--Informacion general del lidar-->
-
+<div align= "center">
+<img width="400"  alt="LiDar" src="https://github.com/user-attachments/assets/1c6af9ea-e131-40e6-aec6-217a148aaa9f")/>
+</div>
 ## 🔢 Procedimiento
 
 ### 🏗️ Arquitectura en ROS Melodic
