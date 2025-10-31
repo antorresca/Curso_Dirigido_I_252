@@ -101,6 +101,7 @@ El lidar implementado es un Sick Nav 350-3232 el cual tiene una capacidad de det
 <div align= "center">
 <img width="400" height="547" alt="LiDar" src="https://github.com/user-attachments/assets/1c6af9ea-e131-40e6-aec6-217a148aaa9f")/>
 </div>
+
 ## 🔢 Procedimiento
 
 ### 🏗️ Arquitectura en ROS Melodic
