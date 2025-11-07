@@ -270,11 +270,25 @@ Dando como resultado:
 
 ### 🖥️ Simulación
 
-Para la simulación se emplearon los archivos base de gazebo desarrollados previamente acotandolos especificamente para el SDV 1 (puesto que para cada SDV cambian ciertas caracteristicas técnicas y físicas) estos archivos de lanzamiento fueron actualizados para ROS2, debido a que ya no se emplean archivos de tipo YML sino que los parametros deben ser declarados dentro de los propios archivos de lanzamiento, por otro lado, en el desarrollo original se tenian diversos parametros para cada SDV tanto generales como especificos por lo cual fue necesario comprender los archivos URDF para el correcto ensamble en Gazebo del robot. A continuación se puede observar el modelo CAD del robot en Gazebo:
+Para la simulación se emplearon los archivos base de Gazebo desarrollados previamente, acotándolos específicamente para el SDV 1, ya que para cada SDV cambian ciertas características técnicas y físicas. Estos archivos de lanzamiento fueron actualizados a ROS 2, debido a que en esta versión ya no se utilizan archivos de tipo YML, sino que los parámetros deben declararse dentro de los propios archivos de lanzamiento.
 
+En el desarrollo original existían diversos parámetros para cada SDV, tanto generales como específicos, por lo que fue necesario comprender la estructura de los archivos URDF para lograr el correcto ensamble del robot en Gazebo. Además, se actualizó la declaración correspondiente para emplear el mapa del laboratorio.
 
+A continuación, se presenta el modelo CAD del robot y del entorno del laboratorio en Gazebo:
 
-Tambien se planteó el uso del software *NVIDIA - Issac Sim* para la simulación robotica, sin embargo, este producto requiere amplias capacidades de computo por lo cual no ha sido posible su uso.
+<div align="center">
+<img width="882" height="643" alt="image" src="https://github.com/user-attachments/assets/e7bf0597-9bf4-4f9b-954e-439f32685df2" />
+</div>
+
+También se consideró el uso del software NVIDIA Isaac Sim para la simulación robótica; sin embargo, este producto requiere amplias capacidades de cómputo, por lo cual no ha sido posible su implementación.
+
+Por otra parte, se crearon las dependencias necesarias para la transformación de marcos de referencia (tf) con el fin de visualizar el robot en RViz. A continuación, se muestra su visualización en dicho programa:
+
+<div align="center">
+<img width="882" height="643" alt="image" src="https://github.com/user-attachments/assets/27942275-2cc4-40c5-97e7-a8b4f41ea8b4" />
+</div>
+
+**Nota:** En RViz únicamente se muestra el robot, ya que las transformaciones tf solo se aplican al modelo del robot y no al mapa.
 
 ### 📡 Lidar
 
