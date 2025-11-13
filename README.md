@@ -1,44 +1,40 @@
-# 📡 Algoritmos de Navegación y Localización - 2025-2
+# 📡 Algoritmos de Navegación y Localización - 2025-2 <!-- omit from toc -->
 
-## 🪶 Estudiantes:
+## 🪶 Estudiantes: <!-- omit from toc -->
 * Juan Camilo Gomez Robayo
 * Andres Camilo Torres-Cajamarca
 
-## 👨‍🏫 Profesores:
+## 👨‍🏫 Profesores: <!-- omit from toc -->
 * PhD. Ing. Ricardo Emiro Ramírez Heredia
 * PhD. Ing. Pedro Fabian Cárdenas Herrera
 
-## 📚 Indice
+## 📚 Indice <!-- omit from toc -->
 
-- [📡 Algoritmos de Navegación y Localización - 2025-2](#-algoritmos-de-navegación-y-localización---2025-2)
-  - [🪶 Estudiantes:](#-estudiantes)
-  - [👨‍🏫 Profesores:](#-profesores)
-  - [📚 Indice](#-indice)
-  - [🎯 Objetivos](#-objetivos)
-  - [🚗 Conociendo al SDV](#-conociendo-al-sdv)
-    - [🧱 Componentes implementados](#-componentes-implementados)
-      - [🎛️ Tiva](#️-tiva)
-      - [🚏 Driver y Encoder](#-driver-y-encoder)
-      - [🚘 Motores](#-motores)
-      - [🧠 NUC](#-nuc)
-      - [📶 Lidar](#-lidar)
-  - [🔢 Procedimiento](#-procedimiento)
-    - [🏗️ Arquitectura en ROS Melodic](#️-arquitectura-en-ros-melodic)
-    - [💻 Firmware de Tiva](#-firmware-de-tiva)
-    - [🤖 Arquitectura en ROS2 Humble](#-arquitectura-en-ros2-humble)
-    - [⚙️ Cinemática del SDV](#️-cinemática-del-sdv)
-      - [🧾 Pruebas iniciales](#-pruebas-iniciales)
-      - [📝 Caracterización de motores](#-caracterización-de-motores)
-      - [🔧Cambio en cinemática](#cambio-en-cinemática)
-      - [✅ Validación de cinemática](#-validación-de-cinemática)
-    - [🖥️ Simulación](#️-simulación)
-    - [📡 Lidar](#-lidar-1)
-  - [📖 Bibliografia](#-bibliografia)
+- [1. 🎯 Objetivos](#1--objetivos)
+- [2. 🚗 Conociendo al SDV](#2--conociendo-al-sdv)
+  - [2.1. 🧱 Componentes implementados](#21--componentes-implementados)
+    - [2.1.1. 🎛️ Tiva](#211-️-tiva)
+    - [2.1.2. 🚏 Driver y Encoder](#212--driver-y-encoder)
+    - [2.1.3. 🚘 Motores](#213--motores)
+    - [2.1.4. 🧠 NUC](#214--nuc)
+    - [2.1.5. 📶 Lidar](#215--lidar)
+- [3. 🔢 Procedimiento](#3--procedimiento)
+  - [3.1. 🏗️ Arquitectura en ROS Melodic](#31-️-arquitectura-en-ros-melodic)
+  - [3.2. 💻 Firmware de Tiva](#32--firmware-de-tiva)
+  - [3.3. 🤖 Arquitectura en ROS2 Humble](#33--arquitectura-en-ros2-humble)
+  - [3.4. ⚙️ Cinemática del SDV](#34-️-cinemática-del-sdv)
+    - [3.4.1. 🧾 Pruebas iniciales](#341--pruebas-iniciales)
+    - [3.4.2. 📝 Caracterización de motores](#342--caracterización-de-motores)
+    - [3.4.3. 🔧Cambio en cinemática](#343-cambio-en-cinemática)
+    - [3.4.4. ✅ Validación de cinemática](#344--validación-de-cinemática)
+  - [3.5. 🖥️ Simulación](#35-️-simulación)
+  - [3.6. 📡 Lidar](#36--lidar)
+- [4. 📖 Bibliografia](#4--bibliografia)
 
 
-## 🎯 Objetivos
+## 1. 🎯 Objetivos
 
-## 🚗 Conociendo al SDV
+## 2. 🚗 Conociendo al SDV
 
 En el proceso de migración del SDVUN1 a ROS2 es necesario conocer de primera mano el funcionamiento y operación de los componentes del robot. Lo primero por descubrir es el rol de la Tiva en el proceso de comunicación entre los drivers de los motores y la NUC.
 <div align="center">
@@ -47,9 +43,9 @@ En el proceso de migración del SDVUN1 a ROS2 es necesario conocer de primera ma
 
 Primero iniciamos con las conexiones fisicas entre los motores y los encoders a los drivers, a continuación se presenta el esquema de conexiones descritas.
 
-### 🧱 Componentes implementados 
+### 2.1. 🧱 Componentes implementados 
 
-#### 🎛️ Tiva
+#### 2.1.1. 🎛️ Tiva
 El SDV utiliza una placa de desarrollo launchpad TIVA de National Instruments, la cual se encarga de configurar la comunicación entre la NUC y los motores del vehículo para la ejecución de un movimiento controlado, a continuación se presenta la imagen de la tiva que además está montada sobre una PCB desarrollada para la hacer la conexión por puerto SATA con los drivers de los respectivos motores:
 <div align="center">
 <img width="400"  alt="Conexión" src="https://github.com/user-attachments/assets/9c5efe28-f632-4d6a-85b1-192cad82ea40" />
@@ -62,7 +58,7 @@ Además, se desarrolló esta PCB que se encarga del mapeo de las conexiones en e
 
 <!---Poner informacion del LaunchPad--->
 
-#### 🚏 Driver y Encoder
+#### 2.1.2. 🚏 Driver y Encoder
 El driver utilizado es un driver de EsconMotor referencia 50/5 el cual se comunica por puerto serial con la tiva, que le envía los valores de PWM para el motor que controla y se realimenta con el encoder, esta realimentación la usa para realizar el control de velocidad en el motor correspondiente. Tiene diferentes entradas y salidas, entre ellas una entrada para las señales digitales del encoder y un puerto de comunicación con la tiva a traves de un cable SATA. 
 
 <div align="center">
@@ -78,7 +74,7 @@ El encoder utilizado tiene una resolucón de 1200 PPR, lo cual brinda una resolu
 
 <!---Poner informacion del driver--->
 
-#### 🚘 Motores
+#### 2.1.3. 🚘 Motores
 Los motores tambien son de la marca Maxon Motors, son motores DC con un sistema de engranajes que generan una reducción de 57/1 y elevan el torque del motor. 
 <div align="center">
 <img width="400"  alt="Motor" src="https://github.com/user-attachments/assets/9ff65ddc-7f57-4008-aff4-1093654eaa7f" />
@@ -87,7 +83,7 @@ Los motores tambien son de la marca Maxon Motors, son motores DC con un sistema 
 
 <!---Poner informacion de los motores--->
 
-#### 🧠 NUC
+#### 2.1.4. 🧠 NUC
 El procesamiento en general corre sobre una Intel NUC que posee un procesador Core I7 con 8 Núcleos, 8 GB de memoria Ram y un SSD SATA de 240 GB, se conecta a la red local a través de la red WIFI de laboratorio.
 <div align= "center">
 <img width="400"  alt="NUC" src="https://github.com/user-attachments/assets/814236b2-b625-4bf7-a34b-7d7d41c1503f") />
@@ -95,16 +91,16 @@ El procesamiento en general corre sobre una Intel NUC que posee un procesador Co
 
 <!---Poner informacion de la NUC y sus caracteristicas de hardware--->
 
-#### 📶 Lidar
+#### 2.1.5. 📶 Lidar
 El lidar implementado es un Sick Nav 350-3232 el cual tiene una capacidad de detección de 360° se alimenta con 2 Baterías LiPo de 4 celdas cada una y se conecta a la NUC a traves del puerto Ethernet, es necesario mencionar que la IP del adaptador de Red debe estár en el mismo rango de IP que el LiDar ya que una mala configuración no permite que se inicie la comunicación entre el LiDar y la NUC
 <!--Informacion general del lidar-->
 <div align= "center">
 <img width="400" height="547" alt="LiDar" src="https://github.com/user-attachments/assets/1c6af9ea-e131-40e6-aec6-217a148aaa9f")/>
 </div>
 
-## 🔢 Procedimiento
+## 3. 🔢 Procedimiento
 
-### 🏗️ Arquitectura en ROS Melodic
+### 3.1. 🏗️ Arquitectura en ROS Melodic
 
 La arquitectura inicial desarrollada por el grupo DIMA fue implementada en ROS Melodic 1.14.12 y los nodos y tópicos implementados se muestran a continuación en el RQT de funcionamiento.
 
@@ -130,7 +126,7 @@ Teniendo en cuenta lo anterior se decidió empezar con la actualización a ROS2 
 
 Cabe aclarar que se tiene acceso a los archivos originales de los SDV por lo cual se puede reutilizar archivos de declaraciones (en C++) y simulaciones (con archivos DAE).
 
-### 💻 Firmware de Tiva
+### 3.2. 💻 Firmware de Tiva
 
 para acceder al firmware de la tiva se ejecuta el siguiente comando
 
@@ -154,16 +150,16 @@ Aca se puede observar los deversos comandos que se pueden enviar a la tiva, el n
 * al enviar ```m 0 +/-V1 +/-V2``` los motores se deshabilitan y el robot se detiene
 * Las velocidades que se envian tiene en cuenta el marco de referencia del robot ($+x$ en sentido de avance) mas no el marco de referencia de cada rueda ($+z$ saliendo de la rueda, provocando que la rueda derecha deba girar en sentido negativo a este marco para lograr avance lineal)
 
-### 🤖 Arquitectura en ROS2 Humble
+### 3.3. 🤖 Arquitectura en ROS2 Humble
 
 Una vez se comprendió la comunicación entre la NUC y la tiva para el envio de comandos al driver de los motores se procedió con la actualización de los nodos descritros en [Arquitectura en ROS Noetic](#️-arquitectura-en-ros-noetic). Acontinuación se describen los nodos actualizados
 
 * **_SDV_Serial:_**  Permite la comunicación con la Tiva por medio del puerto serial. Los comandos enviados siguen la tabla descrita en la sección [Firmware de Tiva](#-firmware-de-tiva).
 * **_SDV_Control:_**  Realiza la cinematica inversa del robot, por medio de la transformación de las velocidades lineales y angulares a valores PWM para cada rueda. Para mayor información ir a [Cinemática del SDV](#️-cinemática-del-sdv)
 
-### ⚙️ Cinemática del SDV
+### 3.4. ⚙️ Cinemática del SDV
 
-#### 🧾 Pruebas iniciales
+#### 3.4.1. 🧾 Pruebas iniciales
 
 Para comprobar el correcto funcionamiento del robot, se verificó la cinematica implementada en la version inicial (Con ROS noetic) para ello se tomó un video enviadole una velocidad lineal de $0.1\tfrac{m}{s}$ y se procesó con Tracker
 
@@ -175,7 +171,7 @@ Al realizar el analisis con los datos recolectados con el programa dio un promed
 
 <!-- colocar el codigo o la ecuacion que habian empleado-->
 
-#### 📝 Caracterización de motores
+#### 3.4.2. 📝 Caracterización de motores
 
 Para este proceso se enviaron valores de PWM a la tiva iniciando en 20 y en paso de 10 hasta 60 y se contó el número de revoluciones para mismos periodos de tiempo en cada prueba como se muestra en el siguiente video:
 
@@ -202,7 +198,7 @@ $$\text{RPM} = 1.2\text{PWM}-12$$
 
 Cabe resaltar que se asume que la ganacia lineal y desface de los motores para generar torque es aproximadamente igual en ambos sentidos de giro
 
-#### 🔧Cambio en cinemática
+#### 3.4.3. 🔧Cambio en cinemática
 
 Con la regresion lineal hallada en la [Caracterización de motores](#-caracterización-de-motores) se implementó en el código teniendo las siguientes consideraciones:
 
@@ -246,7 +242,7 @@ int getPWM(double V, double W,bool Side){
     }
 ```
 
-#### ✅ Validación de cinemática
+#### 3.4.4. ✅ Validación de cinemática
 
 Una vez cambiada la cinematica implementada, se verificó la velocidad lineal y angular, para ello se tomaron videos y se procesaron con el sofware Tracker
 
@@ -268,7 +264,7 @@ Dando como resultado:
 
 </div>
 
-### 🖥️ Simulación
+### 3.5. 🖥️ Simulación
 
 Para la simulación se emplearon los archivos base de Gazebo desarrollados previamente, acotándolos específicamente para el SDV 1, ya que para cada SDV cambian ciertas características técnicas y físicas. Estos archivos de lanzamiento fueron actualizados a ROS 2, debido a que en esta versión ya no se utilizan archivos de tipo YML, sino que los parámetros deben declararse dentro de los propios archivos de lanzamiento.
 
@@ -290,7 +286,7 @@ Por otra parte, se crearon las dependencias necesarias para la transformación d
 
 **Nota:** En RViz únicamente se muestra el robot, ya que las transformaciones tf solo se aplican al modelo del robot y no al mapa.
 
-### 📡 Lidar
+### 3.6. 📡 Lidar
 
 Para conectar el lidar, se emplea el software oficial *SOPAS_ET*. En primer lugar se verifica la IP asignada al Lidar para su conexión, como se puede ver acontinuación:
 
@@ -332,5 +328,5 @@ dichos nodos permiten la comunicación con el Lidar y la habilitación del topic
 
 Aca se puede ver el entorno que el lidar puede percibir
 
-## 📖 Bibliografia
+## 4. 📖 Bibliografia
 
