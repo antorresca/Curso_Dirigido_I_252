@@ -41,6 +41,10 @@ En el proceso de migración del SDVUN1 a ROS2 es necesario conocer de primera ma
 <img width="700" height="463" alt="LazoControl" src="https://github.com/user-attachments/assets/863656fd-fdd0-49fb-8037-90483a1c4678" />
 </div>
 
+<div align="center">
+  <img width="300"  alt="Blank diagram - Page 23" src="https://github.com/user-attachments/assets/84c4a94c-67f7-480a-b780-e1941fe37414" />
+</div>
+
 Primero iniciamos con las conexiones fisicas entre los motores y los encoders a los drivers, a continuación se presenta el esquema de conexiones descritas.
 
 ### 2.1. 🧱 Componentes implementados 
@@ -102,7 +106,7 @@ El lidar implementado es un Sick Nav 350-3232 el cual tiene una capacidad de det
 
 ### 3.1. 🏗️ Arquitectura en ROS Melodic
 
-La arquitectura inicial desarrollada por el grupo DIMA fue implementada en ROS Melodic 1.14.12 y los nodos y tópicos implementados se muestran a continuación en el RQT de funcionamiento.
+Se quiere comprender el funcionamiento inicial del robot con la arquitectura realizada previamente por el grupo DIMA fue implementada en ROS Melodic 1.14.12. Para ello se analizan los nodos y tópicos implementados, para obtener una visión general de la arquitectura, se muestran a continuación en el grafo RQT.
 
 <div align="center">
 <img width="2960" height="1224" alt="Group" src="https://github.com/user-attachments/assets/19fe4194-843f-41f9-9f89-4250225912e9" />
@@ -110,7 +114,9 @@ La arquitectura inicial desarrollada por el grupo DIMA fue implementada en ROS M
 
 **Nota:** Esta arquitectura se encuentra bajo derechos de autor por lo cual no puede ser compartida en su totalidad.
 
-A partir de este RQT se puede observar lo siguiente:
+Los nodos y su descripción general se pueden comprender en la siguiente tabla:
+
+A partir de esto, se puede decir que:
 
 * Existe un nodo dedicado a la comunicación con la Tiva.
 * Se emplea el paquete oficial de ROS "*move_base*" para la navegación.
