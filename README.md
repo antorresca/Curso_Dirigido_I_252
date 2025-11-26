@@ -22,11 +22,11 @@
   - [3.1. 🏗️ Arquitectura en ROS Melodic](#31-️-arquitectura-en-ros-melodic)
   - [3.2. 💻 Firmware de Tiva](#32--firmware-de-tiva)
   - [3.3. 🤖 Arquitectura en ROS2 Humble](#33--arquitectura-en-ros2-humble)
-  - [3.4. ⚙️ Cinemática del SDV](#34-️-cinemática-del-sdv)
+  - [3.4. ⚙️ Programación de la Cinemática del SDV](#34-️-programación-de-la-cinemática-del-sdv)
     - [3.4.1. 🧾 Pruebas iniciales](#341--pruebas-iniciales)
     - [3.4.2. 📝 Caracterización de motores](#342--caracterización-de-motores)
-    - [3.4.3. 🔧Cambio en cinemática](#343-cambio-en-cinemática)
-    - [3.4.4. ✅ Validación de cinemática](#344--validación-de-cinemática)
+    - [3.4.3. 🔧Cambio en programación de la cinemática](#343-cambio-en-programación-de-la-cinemática)
+    - [3.4.4. ✅ Validación de la programación de la cinemática](#344--validación-de-la-programación-de-la-cinemática)
   - [3.5. 🖥️ Simulación](#35-️-simulación)
   - [3.6. 📡 Lidar](#36--lidar)
 - [4. 📖 Bibliografia](#4--bibliografia)
@@ -155,9 +155,8 @@ Aca se puede observar los deversos comandos que se pueden enviar a la tiva, el n
 Una vez se comprendió la comunicación entre la NUC y la tiva para el envio de comandos al driver de los motores se procedió con la actualización de los nodos descritros en [Arquitectura en ROS Noetic](#️-arquitectura-en-ros-noetic). Acontinuación se describen los nodos actualizados
 
 * **_SDV_Serial:_**  Permite la comunicación con la Tiva por medio del puerto serial. Los comandos enviados siguen la tabla descrita en la sección [Firmware de Tiva](#-firmware-de-tiva).
-* **_SDV_Control:_**  Realiza la cinematica inversa del robot, por medio de la transformación de las velocidades lineales y angulares a valores PWM para cada rueda. Para mayor información ir a [Cinemática del SDV](#️-cinemática-del-sdv)
-
-### 3.4. ⚙️ Cinemática del SDV
+* **_SDV_Control:_**  Realiza la cinematica inversa del robot, por medio de la transformación de las velocidades lineales y angulares a valores PWM para cada rueda. Para mayor información ir a 
+### 3.4. ⚙️ Programación de la Cinemática del SDV
 
 #### 3.4.1. 🧾 Pruebas iniciales
 
@@ -198,7 +197,7 @@ $$\text{RPM} = 1.2\text{PWM}-12$$
 
 Cabe resaltar que se asume que la ganacia lineal y desface de los motores para generar torque es aproximadamente igual en ambos sentidos de giro
 
-#### 3.4.3. 🔧Cambio en cinemática
+#### 3.4.3. 🔧Cambio en programación de la cinemática
 
 Con la regresion lineal hallada en la [Caracterización de motores](#-caracterización-de-motores) se implementó en el código teniendo las siguientes consideraciones:
 
@@ -242,7 +241,7 @@ int getPWM(double V, double W,bool Side){
     }
 ```
 
-#### 3.4.4. ✅ Validación de cinemática
+#### 3.4.4. ✅ Validación de la programación de la cinemática
 
 Una vez cambiada la cinematica implementada, se verificó la velocidad lineal y angular, para ello se tomaron videos y se procesaron con el sofware Tracker
 
