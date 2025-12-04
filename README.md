@@ -29,7 +29,21 @@
     - [3.4.4. ✅ Validación de la programación de la cinemática](#344--validación-de-la-programación-de-la-cinemática)
   - [3.5. 🖥️ Simulación](#35-️-simulación)
   - [3.6. 📡 Lidar](#36--lidar)
-- [4. 📖 Bibliografia](#4--bibliografia)
+- [4. 🌎 Localización](#4--localización)
+  - [4.1. 📝 AMCL](#41--amcl)
+  - [4.2. 🖥️ Implementación](#42-️-implementación)
+- [5. 🗃️ Planeación](#5-️-planeación)
+  - [5.1. ⭐ A\*](#51--a)
+  - [5.2. 🖥️ Implementación](#52-️-implementación)
+- [6. 🕹️ Control](#6-️-control)
+  - [6.1. ⏭️ Pure Pursuite](#61-️-pure-pursuite)
+  - [6.2. 📐 RPP](#62--rpp)
+  - [6.3. 🖥️ Implementación](#63-️-implementación)
+- [7. 🥼 Pruebas](#7--pruebas)
+- [8. 🧪 Resultados](#8--resultados)
+- [9. 🔚 Conclusiones](#9--conclusiones)
+- [10. 👨🏼‍🏫 Proceso de aprendizaje](#10--proceso-de-aprendizaje)
+- [11. 📖 Bibliografia](#11--bibliografia)
 
 
 ## 1. 🎯 Objetivos
@@ -333,5 +347,33 @@ dichos nodos permiten la comunicación con el Lidar y la habilitación del topic
 
 Aca se puede ver el entorno que el lidar puede percibir
 
-## 4. 📖 Bibliografia
+## 4. 🌎 Localización
+
+### 4.1. 📝 AMCL
+
+### 4.2. 🖥️ Implementación
+
+## 5. 🗃️ Planeación
+
+### 5.1. ⭐ A*
+
+### 5.2. 🖥️ Implementación
+
+## 6. 🕹️ Control
+
+### 6.1. ⏭️ Pure Pursuite
+
+### 6.2. 📐 RPP
+
+### 6.3. 🖥️ Implementación
+
+## 7. 🥼 Pruebas
+
+## 8. 🧪 Resultados
+
+## 9. 🔚 Conclusiones
+
+## 10. 👨🏼‍🏫 Proceso de aprendizaje
+
+## 11. 📖 Bibliografia
 
