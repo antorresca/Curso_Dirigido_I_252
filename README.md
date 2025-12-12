@@ -763,7 +763,8 @@ Posteriormente, se realizaron cambios en la confianza de la odometria para que n
 
 ## 5. 🔚 Conclusiones
 
-1. Se logró la operación del robot con ROS2 
+1. Se logró la operación del robot con ROS2, con implementaciones en los tres niveles de desarrollo, aplicando algoritmos de localización , planeacíon de trayectorias, seguimiento y control del robot.
+2. Con la implementación del algoritmos, aplicación de ingeniería inversa y solució de problemas, se logró una profundización en el conocimiento de ROS2 y de herramientas y librerías para robótica movil.
 
 ## 6. 🔜 Trabajo a futuro
 
