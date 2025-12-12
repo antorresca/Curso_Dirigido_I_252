@@ -617,7 +617,17 @@ En el nodo de control se toma el vector Twist que contie los valores de velocida
 
 #### 3.11.1. ⏭️ Pure Pursuit
 
+El algoritmo seleccionado para el seguimiento de trayectoria es el Pure Pursuit, este algoritmo es conocido como el burro y la zanahoria. 
+Funcionamineto: el nodo de seguimiento de trayectoria se suscribe al path generado por el planeador, también obtiene la pose del robot para saber dónde está ubicado, es necesario establecer parametros como la distancia frontal para el seguimiento, a continuación inicia con el cálculo de la distancia de la posición del robot con un punto en la ruta a seguir, calcula la distancia euclidina y si esta es mayor al punto de seguimiento genera los comandos de velocidad lineal y angular que se enviarán a los motores para seguir la trayectoria generada. Si la distancia es menor, entonces habrá alcanzado el objetivo. Tambien calcula la curvatura de giro del robot, esto con el fin de suavizar la trayactoria generada y evitar movimientos bruscos del robot, en la siguiente imagen se presenta el radio de curvatura generado para suavizar el movimiento del robot.
+
+<div align="center">
+<img width="402" height="586" alt="PATH EXPLORATION"src="https://github.com/user-attachments/assets/744d8c39-70ed-4416-b80a-38d57bb6db81" />
+</div>
+
+
 #### 3.11.2. 🖥️ Implementación
+
+El seguidor es un paquete de ROS2 creado dentro del proyecto y con la implementación del algoritmo descrito, se suscribe a diferentes topicos que tienen la información básica como el path, la pose del robot y el escaneo del sensor. El nodo entrega los comandos de velocidad al nodo de control para su respectiva transformación.
 
 ## 4. 🧪 Resultados
 
