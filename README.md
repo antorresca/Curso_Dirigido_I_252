@@ -107,8 +107,15 @@ Esto abrirá RViz2 con la configuración preestablecida.
 ## 4. Puesta en marcha <!-- omit from toc -->
 
 Con todos los nodos en ejecución y RViz2 mostrando el estado del robot, la interfaz debería verse de manera similar a la imagen de referencia:
+<div align="center">
+<img width="1919" height="1015" alt="RViz" src="https://github.com/user-attachments/assets/b8a7de93-0641-4e53-a8e6-dc907bbec9db" />
+</div>
 
 Para enviar un objetivo al robot, seleccione **2D Goal Pose** y haga clic en el punto al que desea que llegue.
+
+<div align="center"
+<img width="928" height="236" alt="Goal" src="https://github.com/user-attachments/assets/178a4d26-5b86-4d27-ae45-daa029583946" />
+</div>
 
 ## 5. Cierre del programa <!-- omit from toc -->
 
@@ -476,7 +483,11 @@ Aca se puede ver el entorno que el lidar puede percibir
 
 ### 3.7. 🗺️ Mapa Global
 
-El mapa global generado previamente por medio de SLAM con el SDV y el Lidar en la versión base se puede ver en [](). Para implementarlo en ROS2 se usa **map_server** de **Nav2**, este nodo toma el archivo **.yaml** y genera el tópico ```\map``` para poder consultar el mapa global cuando se requiera. En la siguiente imagen se puede ver el mapa global del laboratorio LabFabEx:
+El mapa global generado previamente por medio de SLAM con el SDV y el Lidar en la versión base. Para implementarlo en ROS2 se usa **map_server** de **Nav2**, este nodo toma el archivo **.yaml** y genera el tópico ```\map``` para poder consultar el mapa global cuando se requiera. En la siguiente imagen se puede ver el mapa global del laboratorio LabFabEx:
+
+<div align="center">
+      <img src="https://github.com/user-attachments/assets/83af0862-5127-4119-ad06-a2df389a701a"/>
+</div>
 
 ### 3.8. 🌎 Odometría
 
@@ -608,6 +619,10 @@ En el proyecto, este algoritmo se empleó directamente del stack de NAV2 (se pue
 
 Para probar su correcto funcionamiento, en RViz2 se le colocaba una supoción inicial de la pose del robot, y el mismo algoritmo corregia con las mediciónes del Lidar para determinar la pose real, como se puede observar acontinuación:
 
+<div align="center">
+<video src="https://github.com/user-attachments/assets/1fc21658-fa80-4e16-9bbc-869c07fbd3f6">
+</div>
+
 
 ### 3.10. 🗃️ Planeación
 
@@ -657,13 +672,25 @@ Funcionamineto: el nodo de seguimiento de trayectoria se suscribe al path genera
 
 El seguidor es un paquete de ROS2 creado dentro del proyecto y con la implementación del algoritmo descrito, se suscribe a diferentes topicos que tienen la información básica como el path, la pose del robot y el escaneo del sensor. El nodo entrega los comandos de velocidad al nodo de control para su respectiva transformación.
 
+<div align="center">
+<img src="https://github.com/user-attachments/assets/c5cb308c-b3e2-4a9e-8980-5e1f13b93c7e"/>
+</div>
+
+Adicionalmente, se implementó con el escaner un control reactivo de parada que al presencial un objeto a $25cm$ el robot se detiene para evitar colisiones como se oberva en el siguiente video:
+
+<div align="center">
+<video src="https://github.com/user-attachments/assets/709b0390-fcae-4713-aa79-16064e6e9463">
+</div>
+
 ## 4. 🧪 Resultados
 
 ### 4.1. Pipeline obtenido
 
 Para cumplir con la finalidad del proyecto, se logró el siguiente pipeline de robot 
 
-<!--Agregar diagrama realizado-->
+<div align="center">   
+<img width="3465" height="1129" alt="Pipeline" src="https://github.com/user-attachments/assets/3000e395-c923-497c-903b-2ca8a2590f14" />
+</div>
 
 Aca se divide entre:
 
@@ -674,16 +701,20 @@ Aca se divide entre:
 ### 4.2. Arbol de TF
 
 Se logró el siguiente arbol de TF:
-
-
+<div align="center">
+<img src="https://github.com/user-attachments/assets/95386f1a-7b97-45f7-8c9f-22ba554af42d" />
+</div>
 
 ### 4.3. Arquitectura ROS2 Humble
 
-Se logró armar una arquitectura de control en ROS2 Humble, como se puede observar en el siguiente grafo RQT
+Se logró armar una arquitectura de control en ROS2 Humble, como se puede observar en el siguiente grafo RQT:
+
+<div align="center">
+<img src="https://github.com/user-attachments/assets/f2def2b5-0d30-4847-9d71-a11d7e23b67a" />
+</div>
 
 En la siguiente tabla se puede ver los nodos diseñados y los tópicos que publica con una breve descripción
 
-<div align="center">
 
 |         Nodo        |                     Descripción                    | Tópico [pub] |  Tópico [sub]  |
 |:-------------------:|:--------------------------------------------------:|:------------:|:--------------:|
@@ -720,6 +751,9 @@ Para las pruebas de funcionamiento del robot, en primer lugar se realizaron prue
 
 Posteriormente, se realizaron cambios en la confianza de la odometria para que no se confie tanto en esta, reduciendo de 0.5 a 0.1 en la pose, con ello se notó una mejoria en lo que se observa en RViz y lo que sucede, como se pude observar acontinuación:
 
+<div align="center">
+   <video src='https://github.com/user-attachments/assets/53c12920-27c0-4d89-884f-c6d5e5da8f27'>
+</div>
 
 ## 5. 🔚 Conclusiones
 
@@ -728,6 +762,7 @@ Posteriormente, se realizaron cambios en la confianza de la odometria para que n
 Para trabajo futuro se podría agregar las siguientes mejoras:
 
 * Implementación de IMU para mejorar odometría
+* Crear nodo con Hector Mapping para una mejor localización
 * Lectura de encoders de motores
 * Implementación de odometría nativa del Lidar
 * Implementación de algoritmos de Task Planning con IA para toma de decisiones con varios objetivos a alcanzar
