@@ -127,7 +127,6 @@ A continuación se detalla el desarrollo del proyecto.
     <summary>🗂️ Tabla de Contenido</summary>
 
 - [1. 🎯 Objetivos](#1--objetivos)
-- [Pipeline a desarrollar](#pipeline-a-desarrollar)
 - [2. 🚗 Conociendo al SDV](#2--conociendo-al-sdv)
   - [2.1. 🧱 Componentes implementados](#21--componentes-implementados)
     - [2.1.1. 🎛️ Tiva](#211-️-tiva)
@@ -156,7 +155,12 @@ A continuación se detalla el desarrollo del proyecto.
     - [3.11.1. ⏭️ Pure Pursuit](#3111-️-pure-pursuit)
     - [3.11.2. 🖥️ Implementación](#3112-️-implementación)
 - [4. 🧪 Resultados](#4--resultados)
+  - [4.1. Pipeline obtenido](#41-pipeline-obtenido)
+  - [4.2. Arbol de TF](#42-arbol-de-tf)
+  - [4.3. Arquitectura ROS2 Humble](#43-arquitectura-ros2-humble)
+  - [4.4. Robot físico](#44-robot-físico)
 - [5. 🔚 Conclusiones](#5--conclusiones)
+- [6. 🔜 Trabajo a futuro](#6--trabajo-a-futuro)
 - [7. 📖 Bibliografia](#7--bibliografia)
 - [8. 📒 Contacto](#8--contacto)
 
@@ -170,8 +174,6 @@ A continuación se detalla el desarrollo del proyecto.
 2. Implementar algoritmos de control, localización, mapeo y planeación en un robot móvil con arquitectura diferencial.
 
 3. Actualizar el SDV 1 del laboratorio, migrándolo de ROS Melodic a ROS 2 Humble para mejorar su funcionalidad y compatibilidad.
-
-## Pipeline a desarrollar
 
 ## 2. 🚗 Conociendo al SDV
 
@@ -558,11 +560,13 @@ Para poder determinar '*¿dónde se encuentra el robot dentro del mapa?*' se deb
 **¿Cómo Funciona?**
 
 AMCL es un método de localización basado en filtros de partículas. Mantiene un conjunto de hipótesis (partículas) sobre la posible posición del robot en el mapa. Cada vez que el robot se mueve, estas partículas se actualizan según el modelo de movimiento (odometría).
-Al recibir mediciones del sensor láser, el algoritmo compara estas mediciones con el mapa y ajusta el peso de cada partícula según la coincidencia observada. Finalmente, emplea un proceso de resampling para concentrarse en las partículas más probables, logrando una estimación robusta incluso en presencia de ruido.
+Al recibir mediciones del sensor láser, el algoritmo compara estas mediciones con el mapa y ajusta el peso de cada partícula según la coincidencia observada. Finalmente, emplea un proceso de resampling para concentrarse en las partículas más probables, logrando una estimación robusta incluso en presencia de ruido. A continuación se ve una breve muestra visual de como funciona:
 
 <div align="center">
 <img src="https://github.com/user-attachments/assets/897bfaea-438f-486e-be10-068130a8dee9" />
 </div>
+
+Como se puede ver, al inicio hay muchas particulas de supoción de donde se encuentra el robot, y con el laser se ubicado donde debe estar. En cada iteración de movimiento hay una nube de puntos de suposiciones de donde deberia estar el robot que converge con ayuda del laser.
 
 **¿Cómo se implementa?**
 
@@ -577,6 +581,30 @@ Se emplean los siguientes tópicos:
 
 En el proyecto, este algoritmo se empleó directamente del stack de NAV2 (se puede ver la declaración en [sdv_nav.launch.py](src/sdv_nav/launch/sdv_nav.launch.py)) con lo siguientes parámetros:
 
+
+<div align="center">
+
+|      Parámetro      |         Valor         |                  Rango típico                 |                       Descripción corta                       |
+|:-------------------:|:---------------------:|:---------------------------------------------:|:-------------------------------------------------------------:|
+| use_sim_time        | use_sim_time          | true/false                                    | Usa el reloj simulado en lugar del reloj del sistema.         |
+| autostart           | False                 | true/false                                    | Determina si AMCL inicia automáticamente.                     |
+| base_frame_id       | base_link             | string                                        | Frame base del robot.                                         |
+| odom_frame_id       | odom                  | string                                        | Frame de odometría.                                           |
+| global_frame_id     | map                   | string                                        | Frame global utilizado para localización.                     |
+| laser_frame_id      | cloud                 | string                                        | Frame del sensor láser.                                       |
+| scan_topic          | scan                  | string                                        | Tópico del escáner láser.                                     |
+| update_min_d        | 0.5                   | 0.1 – 0.5                                     | Distancia mínima para actualizar partículas.                  |
+| update_min_a        | 0.2                   | 0.05 – 0.2                                    | Rotación mínima para actualizar partículas.                   |
+| recovery_alpha_slow | 0.005                 | 0.001 – 0.01                                  | Tasa lenta para detectar degeneración de partículas.          |
+| recovery_alpha_fast | 0.05                  | 0.01 – 0.1                                    | Tasa rápida para acelerar recuperación.                       |
+| odom_alpha1         | 0.6                   | 0.1 – 0.5                                     | Error de rotación causado por rotación.                       |
+| odom_alpha2         | 0.6                   | 0.1 – 0.5                                     | Error de rotación causado por traslación.                     |
+| odom_alpha3         | 0.8                   | 0.1 – 0.5                                     | Error de traslación causado por traslación.                   |
+| odom_alpha4         | 0.4                   | 0.1 – 0.5                                     | Error de traslación causado por rotación.                     |
+| laser_model_type    | likelihood_field_prob | beam, likelihood_field, likelihood_field_prob | Modelo de sensor empleado.                                    |
+| laser_z_hit         | 0.85                  | 0.9 – 0.95                                    | Peso de lectura correcta; menor = más desconfianza del LiDAR. |
+
+</div>
 
 Para probar su correcto funcionamiento, en RViz2 se le colocaba una supoción inicial de la pose del robot, y el mismo algoritmo corregia con las mediciónes del Lidar para determinar la pose real, como se puede observar acontinuación:
 
@@ -631,12 +659,79 @@ El seguidor es un paquete de ROS2 creado dentro del proyecto y con la implementa
 
 ## 4. 🧪 Resultados
 
+### 4.1. Pipeline obtenido
+
+Para cumplir con la finalidad del proyecto, se logró el siguiente pipeline de robot 
+
+<!--Agregar diagrama realizado-->
+
+Aca se divide entre:
+
+* Nivel Alto (Capa de Aplicación): Interfaz e interacción directa con el usuario. En este nivel se envían los comandos de objetivo (por ejemplo, la posición a la que debe llegar el robot).
+* Nivel Medio (Capa de Control): Recibe los objetivos definidos en la capa de aplicación y los datos de la capa de hardware para ejecutar los algoritmos de localización, planificación y control necesarios para generar las velocidades de movimiento del robot.
+* Nivel Bajo (Capa de Hardware): Ejecuta las velocidades generadas por el nivel de control y realiza la adquisición de datos desde los sensores del robot.
+
+### 4.2. Arbol de TF
+
+Se logró el siguiente arbol de TF:
+
+
+
+### 4.3. Arquitectura ROS2 Humble
+
+Se logró armar una arquitectura de control en ROS2 Humble, como se puede observar en el siguiente grafo RQT
+
+En la siguiente tabla se puede ver los nodos diseñados y los tópicos que publica con una breve descripción
+
+<div align="center">
+
+|         Nodo        |                     Descripción                    | Tópico [pub] |  Tópico [sub]  |
+|:-------------------:|:--------------------------------------------------:|:------------:|:--------------:|
+| sdv_controller_node | Calculo de la cinematica inversa y de la odometria | vel2cmd odom |     cmd_vel    |
+|   sdv_serial_node   |              Comunicación con hardware             |      NA      |     vel2cmd    |
+|     sdv_planner     |      Encontrar camino mas corto hasta objetivo     |     path     |  map pose goal |
+|     sdv_tracking    |    lazo de control de sguimiento de trayectoria    | cmd_vel pose | path pose scan |
+|      map_server     |     mantener disponible el mapa estático global    |      map     |       NA       |
+|      Sick Scan      |                 Controlar el lidar                 |     scan     |       NA       |
+|         amcl        |      localizar el robot dentro del mapa global     |     pose     |  map scan odom |
+
+</div>
+
+Por otro lado, acontinuación se puede ver los tópicos desarrollados y una breve descripción:
+
+<div align="center">
+
+| Tópico  | Descripción                                                   |
+|---------|---------------------------------------------------------------|
+| cmd_vel | velocidad lineal y angular del robot                          |
+| vel2cmd | velocidad de cada rueda                                       |
+| odom    | odometria teórica a partir de velocidades y medidas del robot |
+| map     | mapa global estático                                          |
+| pose    | pose del robot (posición + orientación)                       |
+| goal    | objetivo del robot                                            |
+| path    | trayectoria a seguir                                          |
+| scan    | valores de mediciones con lidar                               |
+
+</div>
+
+### 4.4. Robot físico
+
 Para las pruebas de funcionamiento del robot, en primer lugar se realizaron pruebas con una confianza alta en la odometria, logrando lo que se observa en el siguiente video:
 
 Posteriormente, se realizaron cambios en la confianza de la odometria para que no se confie tanto en esta, reduciendo de 0.5 a 0.1 en la pose, con ello se notó una mejoria en lo que se observa en RViz y lo que sucede, como se pude observar acontinuación:
 
 
 ## 5. 🔚 Conclusiones
+
+## 6. 🔜 Trabajo a futuro
+
+Para trabajo futuro se podría agregar las siguientes mejoras:
+
+* Implementación de IMU para mejorar odometría
+* Lectura de encoders de motores
+* Implementación de odometría nativa del Lidar
+* Implementación de algoritmos de Task Planning con IA para toma de decisiones con varios objetivos a alcanzar
+* Implementación de cámara esterográfica para localización (Trabajo de grado de maestría del [Ing. Juan Camilo Gomez Robayo](juagomezro@unal.edu.co))
 
 ## 7. 📖 Bibliografia
 
