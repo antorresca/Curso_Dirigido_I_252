@@ -1,5 +1,11 @@
 # 📡 Algoritmos de Navegación y Localización - 2025-2 <!-- omit from toc -->
 
+<div align='center'>
+      <img src="https://github.com/user-attachments/assets/ee060fb8-cf1f-4fa6-b386-5f3007993c33" 
+           alt="Escudo UNAL" 
+           width=100>
+</div>
+
 ## 🪶 Estudiantes: <!-- omit from toc -->
 * [Juan Camilo Gomez Robayo](juagomezro@unal.edu.co)
 * [Andres Camilo Torres-Cajamarca](antorresca@unal.edu.co)
@@ -12,7 +18,7 @@
 
 Para emplear el SDV 1 con ROS2 Humble, se deben seguir los siguientes pasos:
 
-### 0.1. Requisitos
+### 0. Requisitos
 
 * Ubuntu 22.04
 * ROS2 Humble
@@ -554,7 +560,9 @@ Para poder determinar '*¿dónde se encuentra el robot dentro del mapa?*' se deb
 AMCL es un método de localización basado en filtros de partículas. Mantiene un conjunto de hipótesis (partículas) sobre la posible posición del robot en el mapa. Cada vez que el robot se mueve, estas partículas se actualizan según el modelo de movimiento (odometría).
 Al recibir mediciones del sensor láser, el algoritmo compara estas mediciones con el mapa y ajusta el peso de cada partícula según la coincidencia observada. Finalmente, emplea un proceso de resampling para concentrarse en las partículas más probables, logrando una estimación robusta incluso en presencia de ruido.
 
-<!-- https://www.hessmer.org/blog/2010/04/04/monte-carlo-localization-for-robots/ Agregar en GITHUB online-->
+<div align="center">
+<img src="https://github.com/user-attachments/assets/897bfaea-438f-486e-be10-068130a8dee9" />
+</div>
 
 **¿Cómo se implementa?**
 
