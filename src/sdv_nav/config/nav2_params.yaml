@@ -1,0 +1,49 @@
+# =======================
+# AMCL PARAMETERS
+# =======================
+amcl:
+  ros__parameters:
+    # Frames y Tópicos
+    use_sim_time: False
+    base_frame_id: "base_link"
+    odom_frame_id: "odom"
+    global_frame_id: "map"
+    laser_frame_id: "cloud"
+    
+    # Tópicos explícitos - ¡IMPORTANTE!
+    odom_topic: "odom"
+    scan_topic: "scan"
+    map_topic: "map"
+    
+    # Transformadas
+    tf_broadcast: true
+    transform_tolerance: 1.0
+    
+    # Inicialización
+    set_initial_pose: false
+    
+    # Filtro de partículas
+    min_particles: 100
+    max_particles: 500
+    update_min_d: 0.2
+    update_min_a: 0.5
+    
+    # Modelo Láser
+    laser_model_type: "likelihood_field"
+    laser_max_range: 10.0
+    max_beams: 30
+    
+    # Modelo Odometría
+    odom_model_type: "diff"
+    alpha1: 0.2
+    alpha2: 0.2
+    alpha3: 0.2
+    alpha4: 0.2
+
+# =======================
+# MAP SERVER PARAMETERS
+# =======================
+map_server:
+  ros__parameters:
+    use_sim_time: False
+    frame_id: "map"

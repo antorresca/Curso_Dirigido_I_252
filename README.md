@@ -1,12 +1,119 @@
 # 📡 Algoritmos de Navegación y Localización - 2025-2 <!-- omit from toc -->
 
 ## 🪶 Estudiantes: <!-- omit from toc -->
-* Juan Camilo Gomez Robayo
-* Andres Camilo Torres-Cajamarca
+* [Juan Camilo Gomez Robayo](juagomezro@unal.edu.co)
+* [Andres Camilo Torres-Cajamarca](antorresca@unal.edu.co)
 
 ## 👨‍🏫 Profesores: <!-- omit from toc -->
 * PhD. Ing. Ricardo Emiro Ramírez Heredia
 * PhD. Ing. Pedro Fabian Cárdenas Herrera
+
+## 🕹️ Manual de Usuario <!-- omit from toc -->
+
+Para emplear el SDV 1 con ROS2 Humble, se deben seguir los siguientes pasos:
+
+### 0.1. Requisitos
+
+* Ubuntu 22.04
+* ROS2 Humble
+* RViz2
+* Acceso red del laboratorio
+* Robot SDV1
+
+### 1. Configuración inicial <!-- omit from toc -->
+
+Para utilizar este proyecto, asegúrese de que el robot esté encendido, con las baterías LiPo cargadas y correctamente conectadas, y con los tres switches activados (Driver, Lidar y NUC).
+
+Además, el robot debe estar ubicado en el HOME definido en el laboratorio.
+
+Si tiene dudas sobre este procedimiento, consulte con el personal del laboratorio.
+
+### 2. Conexión por SHH con el SDV 1 <!-- omit from toc -->
+
+Conéctese a la red del laboratorio *LabFabEx* (o alguna de sus subredes habilitadas) y ejecute en la terminal:
+
+```bash
+ssh sdvr2@192.168.1.11
+```
+
+El sistema pedirá la contraseña, la cual debe solicitar al personal del laboratorio o al correo: ```labfabex_fibog@unal.edu.co```
+
+Una vez conectado al robot, ejecute los siguientes comandos:
+
+```bash
+cd ~/CursoDirigido/SDV_UN_ROS2
+git checkout master
+git pull
+colcon build
+. install/setup.bash
+```
+
+Esto garantiza que cuenta con la versión más actualizada y estable del proyecto.
+
+### 3. Lanzamiento de nodos <!-- omit from toc -->
+
+Desde el robot, ejecutar el siguiente comando
+
+```bash
+ros2 launch sdv_nav sdv_nav.launch.py
+```
+
+Este comando iniciará todos los nodos necesarios para el funcionamiento del sistema.
+
+Por otro lado, en el PC debe cargar la configuración de RViz2 [sdv_nav.rviz](misc/sdv_nav.rviz) Puede hacerlo de dos maneras:
+
+1. **Desde la intrefaz de usuario**
+
+Para abrir la configuración realizada en RViz2, ejecutar:
+
+```bash
+rviz2
+```
+
+Luego, en el menú superior seleccione **File → Open Config** y cargue el archivo *sdv_nav.rviz*
+
+2. **Abrir el archivo desde terminal**
+
+Si se quiere abrir el archivo solo por lineas de comandos, ejecutar:
+
+```bash
+git clone https://github.com/antorresca/Curso_Dirigido_I_252.git
+cd Curso_Dirigido_I_252
+rviz2 -d /misc/sdv_nav.rviz
+```
+
+Esto abrirá RViz2 con la configuración preestablecida.
+
+**Nota:** Verificar en RViz2 que los siguientes items mínimos estén cargados:
+
+* Map
+
+  * Tópico: /map
+
+  * QoS:
+
+    Reliability: Reliable
+
+    Durability: Transient Local
+
+* TF cargado correctamente.
+
+## 4. Puesta en marcha <!-- omit from toc -->
+
+Con todos los nodos en ejecución y RViz2 mostrando el estado del robot, la interfaz debería verse de manera similar a la imagen de referencia:
+
+Para enviar un objetivo al robot, seleccione **2D Goal Pose** y haga clic en el punto al que desea que llegue.
+
+## 5. Cierre del programa <!-- omit from toc -->
+
+En la terminal del robot se puede finalizar con la combinación de teclado "Ctrl+C", de igual manera en la terminal del PC para cerrar el RViz.
+
+----
+----
+
+# ℹ️ Más información  <!-- omit from toc -->
+
+A continuación se detalla el desarrollo del proyecto.
 
 ## 📚 Indice <!-- omit from toc -->
 
@@ -14,6 +121,7 @@
     <summary>🗂️ Tabla de Contenido</summary>
 
 - [1. 🎯 Objetivos](#1--objetivos)
+- [Pipeline a desarrollar](#pipeline-a-desarrollar)
 - [2. 🚗 Conociendo al SDV](#2--conociendo-al-sdv)
   - [2.1. 🧱 Componentes implementados](#21--componentes-implementados)
     - [2.1.1. 🎛️ Tiva](#211-️-tiva)
@@ -33,30 +141,31 @@
   - [3.5. 🖥️ Simulación](#35-️-simulación)
   - [3.6. 📡 Lidar](#36--lidar)
   - [3.7. 🗺️ Mapa Global](#37-️-mapa-global)
-  - [3.8. 🌎 Odometría y Localización](#38--odometría-y-localización)
-    - [3.8.1. 👣 Odometría](#381--odometría)
-    - [3.8.2. 📝 AMCL](#382--amcl)
-      - [3.8.2.1. ¿Cómo Funciona?](#3821-cómo-funciona)
-      - [3.8.2.2. ¿Cómo se implementa?](#3822-cómo-se-implementa)
-    - [3.8.3. 🔥 Hector Mapping](#383--hector-mapping)
-      - [3.8.3.1. ¿Cómo Funciona?](#3831-cómo-funciona)
-      - [3.8.3.2. ¿Cómo se implementa?](#3832-cómo-se-implementa)
-  - [3.9. 🗃️ Planeación](#39-️-planeación)
-    - [3.9.1. ⭐ A\*](#391--a)
-    - [3.9.2. 🖥️ Implementación](#392-️-implementación)
-  - [3.10. 🕹️ Control](#310-️-control)
-    - [3.10.1. ⏭️ Pure Pursuit](#3101-️-pure-pursuit)
-    - [3.10.3. 🖥️ Implementación](#3103-️-implementación)
-- [4. 🥼 Pruebas](#4--pruebas)
-  - [Prueba con AMCL y odometria teórica](#prueba-con-amcl-y-odometria-teórica)
-- [5. 🧪 Resultados](#5--resultados)
-- [6. 🔚 Conclusiones](#6--conclusiones)
-- [7. 👨🏼‍🏫 Proceso de aprendizaje](#7--proceso-de-aprendizaje)
-- [8. 📖 Bibliografia](#8--bibliografia)
+  - [3.8. 🌎 Odometría](#38--odometría)
+  - [3.9. 📍 Localización](#39--localización)
+  - [3.10. 🗃️ Planeación](#310-️-planeación)
+    - [3.10.1. ⭐ A\*](#3101--a)
+    - [3.10.2. 🖥️ Implementación](#3102-️-implementación)
+  - [3.11. 🕹️ Control](#311-️-control)
+    - [3.11.1. ⏭️ Pure Pursuit](#3111-️-pure-pursuit)
+    - [3.11.2. 🖥️ Implementación](#3112-️-implementación)
+- [4. 🧪 Resultados](#4--resultados)
+- [5. 🔚 Conclusiones](#5--conclusiones)
+- [7. 📖 Bibliografia](#7--bibliografia)
+- [8. 📒 Contacto](#8--contacto)
 
 </details>
 
+
 ## 1. 🎯 Objetivos
+
+1. Estudiar y comprender diversos algoritmos de navegación aplicados a robots móviles terrestres.
+
+2. Implementar algoritmos de control, localización, mapeo y planeación en un robot móvil con arquitectura diferencial.
+
+3. Actualizar el SDV 1 del laboratorio, migrándolo de ROS Melodic a ROS 2 Humble para mejorar su funcionalidad y compatibilidad.
+
+## Pipeline a desarrollar
 
 ## 2. 🚗 Conociendo al SDV
 
@@ -361,12 +470,7 @@ Aca se puede ver el entorno que el lidar puede percibir
 
 El mapa global generado previamente por medio de SLAM con el SDV y el Lidar en la versión base se puede ver en [](). Para implementarlo en ROS2 se usa **map_server** de **Nav2**, este nodo toma el archivo **.yaml** y genera el tópico ```\map``` para poder consultar el mapa global cuando se requiera. En la siguiente imagen se puede ver el mapa global del laboratorio LabFabEx:
 
-### 3.8. 🌎 Odometría y Localización
-
-Para que el robot pueda navegar en un entorno, es necesario determinar de manera dinámica su posición dentro del mapa. Inicialmente se empleó la Localización Adaptativa de Monte Carlo (AMCL, por sus siglas en inglés). Sin embargo, debido a que el robot no cuenta con encoders disponibles para la lectura de odometría real, se decidió cambiar a Hector Mapping, que permite obtener tanto la odometría como la localización utilizando únicamente el LIDAR.
-A continuación, se describen ambos enfoques.
-
-#### 3.8.1. 👣 Odometría
+### 3.8. 🌎 Odometría
 
 Para la odometría, inicialmente se empleó una odometría teórica, es decir, a partir de los comandos de velocidad que recibiría el robot ($\dot{\theta}_r$ y $\dot{\theta}_l$) y una pose inicial, se calculaba en cada instante de tiempo la posición del robot mediante las fórmulas estándar de movimiento rectilíneo y curvilíneo.
 Para implementarlo, se desarrolló un algoritmo basado en el siguiente pseudocódigo:
@@ -428,68 +532,77 @@ $$y_t = y_{t-1} - \frac{v}{\omega}\left[\cos(\theta_{t-1}+\omega\Delta t) - \cos
 
 $$\theta_t = \theta_{t-1} + \Delta\theta$$
 
-Es importante destacar que, al ser un modelo teórico, se asumen movimientos ideales: sin deslizamiento, sin pérdidas de potencia en los motores, sin inercia, con cambios instantáneos de velocidad (sin rampas de aceleración/desaceleración), entre otras simplificaciones.
+Es importante destacar que, al ser un modelo teórico, se asumen movimientos ideales: sin deslizamiento, sin pérdidas de potencia en los motores, sin inercia, con cambios instantáneos de velocidad (sin rampas de aceleración/desaceleración), entre otras simplificaciones. 
 
-#### 3.8.2. 📝 AMCL
+**Uso en el proyecto**
 
-##### 3.8.2.1. ¿Cómo Funciona?
+Para implementarlo dentro del proyecto, se colocó el código en el nodo [sdv_controller](src/sdv_controller/src/sdv_controller_node.cpp) que publica en el tópico ```/odom``` la odometria del robot y el TF correspondiente (Para mas información de esto ir a [TF]())
+
+**Modificación para correcto funcionamiento**
+
+Dado que la odometría teórica no ofrece la fiabilidad necesaria para garantizar una navegación precisa, se realizó un ajuste en el mensaje del tópico ```/odom``` de tipo ```nav_msgs/Odometry```.
+En particular, dentro del submensaje ```pose``` (```geometry_msgs/PoseWithCovariance```), se incrementaron los valores de la covarianza con el fin de reducir la confianza del algoritmo de localización en la odometría.
+
+Con esto, el sistema sigue utilizando la odometría como referencia básica para el funcionamiento general del robot, pero evita que el algoritmo de localización dependa excesivamente de ella.
+
+### 3.9. 📍 Localización 
+
+Para poder determinar '*¿dónde se encuentra el robot dentro del mapa?*' se debe implementar un algoritmo de localización, para ello se empleó el Algoritmo de Localización de Monte-Carlo (**AMCL** por sus siglas en inglés) 
+
+**¿Cómo Funciona?**
 
 AMCL es un método de localización basado en filtros de partículas. Mantiene un conjunto de hipótesis (partículas) sobre la posible posición del robot en el mapa. Cada vez que el robot se mueve, estas partículas se actualizan según el modelo de movimiento (odometría).
 Al recibir mediciones del sensor láser, el algoritmo compara estas mediciones con el mapa y ajusta el peso de cada partícula según la coincidencia observada. Finalmente, emplea un proceso de resampling para concentrarse en las partículas más probables, logrando una estimación robusta incluso en presencia de ruido.
 
-##### 3.8.2.2. ¿Cómo se implementa?
+<!-- https://www.hessmer.org/blog/2010/04/04/monte-carlo-localization-for-robots/ Agregar en GITHUB online-->
+
+**¿Cómo se implementa?**
 
 Para implementar AMCL en ROS se utiliza principalmente la odometría del robot, el mapa estático, el LIDAR y una pose inicial. En este proyecto, la pose inicial se definió en un punto home ($x=0$, $y=0$) con una orientación predeterminada ($\omega=0$); sin embargo, dicha pose puede configurarse desde **RViz** o desde un nodo externo mediante el tópico ```\InitialPose```.
 
 Se emplean los siguientes tópicos:
-* ```\odom``` odometria del robot (Ver mas en [Odometría](#381--odometría))
+* ```\odom``` odometria del robot (Ver mas en [Odometría](#38--odometría))
 * ```\scan``` datos del Lidar (Ver mas en [Lidar](#36--lidar))
 * ```\map``` Mapa estático (Ver mas en [Mapa Global](#37-️-mapa-global))
 
-#### 3.8.3. 🔥 Hector Mapping
+**Uso en el proyecto**
 
-##### 3.8.3.1. ¿Cómo Funciona?
+En el proyecto, este algoritmo se empleó directamente del stack de NAV2 (se puede ver la declaración en [sdv_nav.launch.py](src/sdv_nav/launch/sdv_nav.launch.py)) con lo siguientes parámetros:
 
-Hector Mapping es un algoritmo de SLAM 2D diseñado para operar únicamente con datos de un sensor láser, sin necesidad de odometría ni IMU. Utiliza un enfoque basado en scan matching, alineando cada escaneo del LIDAR con el mapa que se construye en tiempo real.
 
-Para esto emplea un método de Gradient Descent sobre un mapa de ocupación tipo grid map, buscando la pose que produce la mejor coincidencia entre el escaneo actual y la estructura del entorno ya mapeada. Este proceso se realiza continuamente, lo que permite obtener localización precisa incluso sin encoders.
+Para probar su correcto funcionamiento, en RViz2 se le colocaba una supoción inicial de la pose del robot, y el mismo algoritmo corregia con las mediciónes del Lidar para determinar la pose real, como se puede observar acontinuación:
 
-Gracias a esta estrategia, Hector Mapping resulta especialmente útil en robots con buenos sensores láser pero sin odometría confiable, entregando una estimación estable y fluida únicamente a partir de los datos del LIDAR.
 
-##### 3.8.3.2. ¿Cómo se implementa?
+### 3.10. 🗃️ Planeación
 
-Para implementar Hector Mapping en ROS se utiliza principalmente el tópico del LIDAR (```/scan```) para realizar el scan matching y construir el mapa dinámico.
-A diferencia de AMCL, Hector Mapping no requiere odometría, aunque puede usarla opcionalmente si está disponible.
+#### 3.10.1. ⭐ A*
 
-El algoritmo publica la pose estimada del robot y genera un mapa dinámico mientras opera, por lo que en este proyecto cumple simultáneamente el rol de odometría y localización, permitiendo la navegación sin encoders ni modelos de movimiento precisos.
+#### 3.10.2. 🖥️ Implementación
 
-### 3.9. 🗃️ Planeación
+### 3.11. 🕹️ Control
 
-#### 3.9.1. ⭐ A*
+#### 3.11.1. ⏭️ Pure Pursuit
 
-#### 3.9.2. 🖥️ Implementación
+#### 3.11.2. 🖥️ Implementación
 
-### 3.10. 🕹️ Control
+## 4. 🧪 Resultados
 
-#### 3.10.1. ⏭️ Pure Pursuit
+Para las pruebas de funcionamiento del robot, en primer lugar se realizaron pruebas con una confianza alta en la odometria, logrando lo que se observa en el siguiente video:
 
-#### 3.10.3. 🖥️ Implementación
+Posteriormente, se realizaron cambios en la confianza de la odometria para que no se confie tanto en esta, reduciendo de 0.5 a 0.1 en la pose, con ello se notó una mejoria en lo que se observa en RViz y lo que sucede, como se pude observar acontinuación:
 
-## 4. 🥼 Pruebas
 
-### Prueba con AMCL y odometria teórica
+## 5. 🔚 Conclusiones
 
-Como prueba inicial, se evaluó el robot utilizando AMCL junto con una odometría teórica, tal como se describe en la sección [Odometría y Localización](#38--odometría-y-localización). Para ello, se configuró RViz2 para visualizar en tiempo real los principales tópicos de ROS (pose actual, goal, odometría, TFs, etc.) y compararlos con el comportamiento físico del robot. 
+## 7. 📖 Bibliografia
 
-Durante las pruebas, se enviaron dos goals distintos con el fin de analizar la respuesta del sistema y observar si la localización se mantenía estable. Las ejecuciones pueden verse a continuación:
+## 8. 📒 Contacto
 
-En la mayoría de los casos, el robot presentaba comportamientos incorrectos: ya fuera porque se perdía y comenzaba a realizar movimientos erráticos, o porque detenía su avance antes de tiempo, dado que el sistema estimaba de forma equivocada que ya había alcanzado el objetivo cuando en realidad todavía estaba lejos de él.
+Para obtener mas información se puede solicitar a:
 
-## 5. 🧪 Resultados
-
-## 6. 🔚 Conclusiones
-
-## 7. 👨🏼‍🏫 Proceso de aprendizaje
-
-## 8. 📖 Bibliografia
+* <labfabex_fibog@unal.edu.co>
+* <antorresca@unal.edu.co>
+* <juagomezro@unal.edu.co>
+* <reramirezh@unal.edu.co>
+* <pfcardenash@unal.edu.co>
 
