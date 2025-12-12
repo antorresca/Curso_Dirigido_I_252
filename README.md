@@ -611,11 +611,9 @@ Dentro del bloque de programacíon el planeador A* es un nodo que lee el mapa gl
 <img width="402" height="586" alt="PATH EXPLORATION"src="https://github.com/user-attachments/assets/96dca1db-f9a2-4df8-b701-d39b7a053fd9" />
 </div>
 
-
-
-
 ### 3.11. 🕹️ Control
 
+En el nodo de control se toma el vector Twist que contie los valores de velocidad lineal y angular para calcular el valor de PWM que se debe enviar a cada motor para el efectúe el movimiento que se ciña a la trayectoria entregada por el planeador, para la realización de estos cálculos toma como base la cinemática teórica del robot, ya que por su construcción no es posible obtener la lectura de los encoder, además de los valores de modulación en ancho de pulso, también calcula la odometría del robot de acuerdo a los valores medidos de la trocha y los radios de las ruedas.
 
 #### 3.11.1. ⏭️ Pure Pursuit
 
