@@ -757,6 +757,8 @@ Posteriormente, se realizaron cambios en la confianza de la odometria para que n
 
 ## 5. 🔚 Conclusiones
 
+1. Se logró la operación del robot con ROS2 
+
 ## 6. 🔜 Trabajo a futuro
 
 Para trabajo futuro se podría agregar las siguientes mejoras:
