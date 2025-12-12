@@ -749,6 +749,12 @@ Por otro lado, acontinuación se puede ver los tópicos desarrollados y una brev
 
 Para las pruebas de funcionamiento del robot, en primer lugar se realizaron pruebas con una confianza alta en la odometria, logrando lo que se observa en el siguiente video:
 
+<div align="center">
+
+<video src="https://github.com/user-attachments/assets/74ff4212-9beb-41e1-8833-ce6a351c95f3">
+
+</div>
+
 Posteriormente, se realizaron cambios en la confianza de la odometria para que no se confie tanto en esta, reduciendo de 0.5 a 0.1 en la pose, con ello se notó una mejoria en lo que se observa en RViz y lo que sucede, como se pude observar acontinuación:
 
 <div align="center">
