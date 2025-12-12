@@ -583,11 +583,39 @@ Para probar su correcto funcionamiento, en RViz2 se le colocaba una supoción in
 
 ### 3.10. 🗃️ Planeación
 
+La planeación es la parte encargada de generar una ruta válida dentro de un mapa o escenaroio, uniendo una poosición inicial con un objetivo indicado dentro del mismo, evitando colisiones y procurando que la distancia entre el inicio y el objetivo sea la más corta.
+
 #### 3.10.1. ⭐ A*
+A continuación se presenta mediante una imagen el planteamiento lógico del algoritmo A*, el cual se emplea para generar una ruta desde la posición inicial a un objetivo asignado.
+
+Funcionamiento:
+El algoritmo inicia con la obtención de los valores del punto inicial y final dentro de un mapa al que lo descompone en celdas con posiciones libres, ocupadas o inalcanzables, estas celdas contienen cada una un nodo el cual hará parte de la explración en el mapa, a cada celda se le va asignando el valor correspondiente a su estado como se presenta a continuación:
+
+<div align="center">
+<img width="402" height="586" alt="OCCUPANCY GRID" src="https://github.com/user-attachments/assets/4400a19e-1cfd-4cc8-bbd9-6bb13bab8b16" />
+</div>
+
+Los valores asignados a la grilla son los que permiten al algoritmo hacer la exploración dentro de los espacios libres en busca del objetivo entregado, en el algoritmo se asignan pesos a las diferentes ubicaciones de la grilla además de un valor heuristico que se calcula automaticamente de acuerdo a la ubicación del punto con respecto al objetivo trazado. Se arranca desde la pose inicial hacia el objetivo buscando la ruta de menor peso, pretendiendo optimizar el recorrido realizado por el robot.
+
+<div align="center">
+<img width="402" height="586" alt="PATH EXPLORATION"src="https://github.com/user-attachments/assets/d2de1527-47a2-4f79-985b-308da84fd11a" />
+</div>
+
+Para el ejemplo la ruta más corta tiene un peso de 23 siendo el menor peso obtenido para los nodos que unen el inicio y el final. El proceso se basa en llegar al nodo siguiente con el menor peso, el nodo actual pasa a nodo visitado y el nodo nuevo pasa a la prioridad en la cola, según la cantidad de rutas existe el mismo valor de nodos en la cabeza de la cola, en la medida que se van visitando las zonas cercanas al nodo actual se van priorizando o decartando nodos dependiendo del peso o la cercania con el objetivo.
 
 #### 3.10.2. 🖥️ Implementación
 
+Dentro del bloque de programacíon el planeador A* es un nodo que lee el mapa global, que será el entorno en el que va a explorar, solicita la pose inicial y el objetivo a alcanzar, con esta información genera un PATH o camino el cual lleva al robot del inicio al objetivo señalado, el path es publicado para que el nodo de control se encargue de hacer que el robot siga la trayectoria. A continuación se presenta un esquema que visualiza la ubicación del algoritmo dentro de la lógica de programación.
+
+<div align="center">
+<img width="402" height="586" alt="PATH EXPLORATION"src="https://github.com/user-attachments/assets/96dca1db-f9a2-4df8-b701-d39b7a053fd9" />
+</div>
+
+
+
+
 ### 3.11. 🕹️ Control
+
 
 #### 3.11.1. ⏭️ Pure Pursuit
 
