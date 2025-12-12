@@ -779,6 +779,10 @@ Para trabajo futuro se podría agregar las siguientes mejoras:
 
 ## 7. 📖 Bibliografia
 
+* A. Brandi, "Self Driving and ROS 2 - Learn by Doing! Map & Localization", Udemy, curso en línea, 2025. [En línea] Disponible en: [https://www.udemy.com/course/self-driving-and-ros-2-learn-by-doing-map-localization/](https://www.udemy.com/course/self-driving-and-ros-2-learn-by-doing-map-localization/)
+* A. Brandi, "Self Driving and ROS 2 - Learn by Doing! Odometry & Control", Udemy, curso en línea, 2025. [En línea] Disponible en: [https://www.udemy.com/course/self-driving-and-ros-2-learn-by-doing-odometry-control/](https://www.udemy.com/course/self-driving-and-ros-2-learn-by-doing-odometry-control/)
+*  A. Brandi, "Self Driving and ROS 2 - Learn by Doing! Plan & Navigation", Udemy, curso en línea, 2025. [En línea] Disponible en: [https://www.udemy.com/course/self-driving-and-ros-2-learn-by-doing-plan-navigation](https://www.udemy.com/course/self-driving-and-ros-2-learn-by-doing-plan-navigation)
+
 ## 8. 📒 Contacto
 
 Para obtener mas información se puede solicitar a:
